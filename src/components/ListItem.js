@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { StyleSheet, ScrollView, Text, View, FlatList } from 'react-native'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 import StoreData from '../data/storeData'
 import AppItem from './AppItem'
+import { primaryColor, secondaryColor } from '../data/Colors'
 
 export class ListItem extends Component {
     render() {
@@ -12,7 +14,7 @@ export class ListItem extends Component {
             <ScrollView style={styles.list}>
                 <View style={styles.head}>
                     <Text style={styles.textHead}>{name}</Text>
-                    <Text style={styles.textHead}> --{'>'} </Text>
+                    <Text style={styles.textHead}> <MaterialIcons name="arrow-forward-ios" size={25} color={secondaryColor} /> </Text>
                 </View>
                 <FlatList 
                     data={[...apps, ...StoreData]}
@@ -42,6 +44,6 @@ const styles=StyleSheet.create({
     textHead: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#000000'
+        color: secondaryColor,
     },
 })

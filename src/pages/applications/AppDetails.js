@@ -5,6 +5,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 //import Video from 'react-native-video'
 
+import { primaryColor, secondaryColor } from '../../data/Colors'
+
 const baseUrl="https://smart-play.herokuapp.com"
 const fakeUrl="https://smart-play.herokuapp.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBOQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b34b7d4ba671ef78867f62f722333a9a84c10ef2/LED%20Neon%20Black.apk"
 
@@ -50,12 +52,12 @@ export class AppDetails extends Component {
         return (<>
             <View>
                 <TouchableOpacity style={styles.goBack} onPress={this.props.navigation.goBack}>
-                    <MaterialIcons name="arrow-back" size={30} />
+                    <MaterialIcons name="arrow-back" color={secondaryColor} size={40} />
                 </TouchableOpacity>
             </View>
             <ScrollView style={styles.appDetail} contentContainerStyle={styles.appContent} showsVerticalScrollIndicator={false}>
                 
-                { this.state.loading ? (<View style={styles.activityContainer}><ActivityIndicator size={100} color="red" /></View> ) : 
+                { this.state.loading ? (<View style={styles.activityContainer}><ActivityIndicator size={100} color={primaryColor} /></View> ) : 
                     <>
                         <View style={styles.head}>
                             <View style={styles.imageView}>
@@ -131,6 +133,7 @@ const styles=StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        height: 500,
     },
     appDetail:{
         flex: 1,
@@ -141,7 +144,8 @@ const styles=StyleSheet.create({
         alignItems: 'center'
     },
     goBack: {
-        marginBottom: 20,
+        //margin: 10,
+        backgroundColor: primaryColor
     },
     head: {
         flexDirection: 'row',
@@ -165,12 +169,12 @@ const styles=StyleSheet.create({
     bigText: {
         fontSize: 30,
         fontWeight: 'bold',
-        color: '#000'
+        color: secondaryColor
     },
     bigText2: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#000'
+        color: secondaryColor
     },
     subText: {
         fontSize: 20,
@@ -183,7 +187,7 @@ const styles=StyleSheet.create({
         borderRightWidth: 0.5,
     },
     statsText:{
-        color: '#000',
+        color: secondaryColor,
         textAlign: 'center',
         fontSize: 15,
         fontWeight: 'bold'
@@ -197,14 +201,14 @@ const styles=StyleSheet.create({
         justifyContent: 'center',
         margin: 30,
         borderRadius: 10,
-        backgroundColor: "red",
+        backgroundColor: primaryColor,
         textAlign: 'center',
         padding: 10,
     },
     installText: {
         fontSize: 20,
         fontWeight: "bold",
-        color: '#fff',
+        color: secondaryColor,
     },
     pictures: {
         marginBottom: 20

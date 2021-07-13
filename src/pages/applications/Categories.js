@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { primaryColor, secondaryColor } from '../../data/Colors'
 
 export class Categories extends Component {
 
@@ -32,11 +33,11 @@ export class Categories extends Component {
                 <View style={styles.categories}>
                             <View style={styles.header}>
                                 <TouchableOpacity onPress={this.props.navigation.goBack}>
-                                    <MaterialIcons name="arrow-back" size={30} />
+                                    <MaterialIcons name="arrow-back" color={secondaryColor} size={40} />
                                 </TouchableOpacity>
                                 <Text style={styles.headerText}>Categories</Text>
                             </View>
-                    { this.state.loading ? (<View style={styles.activityContainer}><ActivityIndicator size={100} color="red" /></View> ) : (
+                    { this.state.loading ? (<View style={styles.activityContainer}><ActivityIndicator size={100} color={primaryColor} /></View> ) : (
                             <View style={styles.categoriesList}>
                                 <FlatList 
                                     data={this.state.categories}
@@ -60,6 +61,10 @@ export class CategorieItem extends Component {
         return (
             <TouchableOpacity style={styles.categorieItem} onPress={()=>this.props.showApp(data)}>
                 <Text style={styles.categorieText}>{data.name}</Text>
+                <View style={styles.categorieDetails}>
+                    <Text >X applications</Text>
+                    <Text ><MaterialIcons name="star" color={primaryColor} size={20} /><MaterialIcons name="star" color={primaryColor} size={20} /><MaterialIcons name="star" color={primaryColor} size={20} /><MaterialIcons name="star-half" color={primaryColor} size={20} /> </Text>
+                </View>
             </TouchableOpacity>
         )
     }
@@ -71,29 +76,44 @@ export class CategorieItem extends Component {
 
 const styles=StyleSheet.create({
     categories: {
-        flex: 1
+        flex: 1,
+        marginBottom: 60,
     },
     header: {
         flexDirection: 'row',
         alignItems: 'center',
         padding: 10,
         borderBottomWidth: 1,
+        backgroundColor: primaryColor
     },
     headerText: {
         marginLeft: 20,
         fontSize: 30,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: secondaryColor,
     },
     categoriesList: {
         padding: 10
     },
     categorieItem: {
+        height: 100,
         marginTop: 25,
-        borderBottomWidth: 1
+        marginRight: 10,
+        marginLeft: 10,
+        padding: 20,
+        backgroundColor: '#fff',
+        borderRadius: 5,
     },
     categorieText: {
         fontSize: 25,
-        fontWeight: '500',
+        fontWeight: '900',
+        color: secondaryColor
+    },
+    categorieDetails: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
     },
     activityContainer :{
         flex: 1,

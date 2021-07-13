@@ -4,6 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 import AppItem from '../../components/AppItem'
 import StoreData from '../../data/storeData'
+import { primaryColor, secondaryColor } from '../../data/Colors'
 
 export class AppCategorie extends Component {
     constructor(props) {
@@ -54,6 +55,7 @@ const styles=StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         borderBottomWidth: 1,
+        backgroundColor: primaryColor
     },
     goBack: {
         margin: 20

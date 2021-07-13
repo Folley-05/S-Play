@@ -4,8 +4,8 @@ import { Platform, StyleSheet, View, FlatList, Image, PermissionsAndroid, Activi
 
 import NavBar from '../../layout/NavBar'
 import ListItem from '../../components/ListItem'
-
 import { Categories } from '../../data/storeData'
+import { primaryColor, secondaryColor } from '../../data/Colors'
 
 export class Home extends Component {
     constructor(props) {
@@ -40,16 +40,16 @@ export class Home extends Component {
         )
     }
 
-    componentDidMount() {
-        //console.log("cdm")
-        console.log(Platform)
-        fetch("https://smart-play.herokuapp.com/categories.json", {method: "GET"})
-        .then(response=>response.json()).then(res=>{
-            //console.log(res)
-            this.setState({loading: false, categories: res})
-        })
-        .catch(err=>console.log("une erreur est survenue : ", err))
-    }
+    // componentDidMount() {
+    //     //console.log("cdm")
+    //     console.log(Platform)
+    //     fetch("https://smart-play.herokuapp.com/categories.json", {method: "GET"})
+    //     .then(response=>response.json()).then(res=>{
+    //         console.log(res)
+    //         this.setState({loading: false, categories: res})
+    //     })
+    //     .catch(err=>console.log("une erreur est survenue : ", err))
+    // }
     
     showDetails=id=>{
         console.log("vous allez etre navigue")
@@ -62,23 +62,22 @@ export class Home extends Component {
     navigate=desti=>this.props.navigation.navigate(desti)
 
     render() {
-        //console.log(RNFetchBlob)
         return (
-            <>
+            <View>
                 <View>
-                    <NavBar search={this.search} nav={this.navigate} />
+                    <NavBar search={this.search} nav={this.navigate} navigation={this.props.navigation} />
                 </View>
-                <View style={{flex: 1, marginTop: 15}}>
+                <View style={styles.flatList} >
                     { !this.state.loading ?  (
                         <FlatList 
                             data={this.state.categories}
                             renderItem={(data)=><ListItem navigate={this.showDetails} data={data.item} />}
                             keyExtractor={(item, i)=>`${Date.now()}+${i}`}
                         />
-                    ) : (<View style={styles.activityContainer}><ActivityIndicator size={100} color="red" /></View> )
+                    ) : (<View style={styles.activityContainer}><ActivityIndicator size={100} color={primaryColor} /></View> )
                 }
                 </View>
-            </>
+            </View>
         )
     }
 }
@@ -87,15 +86,21 @@ export default Home
 
 
 const styles=StyleSheet.create({
+    home: {
+    },
     image: {
         width: 100,
         height: 100,
         borderRadius: 15,
     },
     activityContainer :{
-        flex: 1,
+        //flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        height: 500,
+    },
+    flatList: {
+        marginBottom: 70,
     },
 })
 

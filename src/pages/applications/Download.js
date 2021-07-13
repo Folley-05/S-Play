@@ -6,6 +6,8 @@ import {Surface, Shape} from '@react-native-community/art';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import RNBackgroundDownloader from 'react-native-background-downloader'
 
+import { primaryColor, secondaryColor } from '../../data/Colors'
+
 const dir=`${RNBackgroundDownloader.directories.documents}/clavier.apk`
 const baseUrl="https://smart-play.herokuapp.com"
 const android = RNFetchBlob.android
@@ -68,11 +70,11 @@ export class Download extends Component {
                 <TouchableOpacity style={styles.goBack} onPress={this.props.navigation.goBack}>
                     <MaterialIcons name="arrow-back" size={30} />
                 </TouchableOpacity>
-            {this.state.loading ? (<View style={styles.activityContainer}><ActivityIndicator size={100} color="red" /></View> ) :  (
+            {this.state.loading ? (<View style={styles.activityContainer}><ActivityIndicator size={100} color={primaryColor} /></View> ) :  (
                 <View style={styles.downloadView} >
                     <Text style={styles.appName}>{this.app["application_name"]}</Text>
                     <View>
-                        <Progress.Circle progress={this.state.progress} size={250} borderWidth={2} showsText={true} color="red" />
+                        <Progress.Circle progress={this.state.progress} size={250} borderWidth={2} showsText={true} color={primaryColor} />
                         <Image style={styles.image} source={{uri: baseUrl+this.app["images_1"]}} />
                     </View>
                     <Text style={styles.progressText} >{this.text}</Text>
@@ -109,7 +111,8 @@ const styles=StyleSheet.create({
     appName: {
         fontSize: 25,
         fontWeight: 'bold',
-        marginTop: 20
+        marginTop: 20,
+        color: secondaryColor,
     },
     appContainer: {
         position: 'relative'
@@ -128,12 +131,12 @@ const styles=StyleSheet.create({
         width: 250,
         margin: 50,
         borderRadius: 10,
-        backgroundColor: "red",
+        backgroundColor: primaryColor,
         textAlign: 'center',
         padding: 8,
     },
     progressText: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     installButtonText: {
         fontSize: 20,
@@ -141,8 +144,3 @@ const styles=StyleSheet.create({
         color: '#fff',
     },
 })
-
-/* <Progress.Circle
-                        size={100} indeterminate={true}
-                    />
-                    <Progress.Pie progress={0.4} size={100} /> */
